@@ -22,7 +22,7 @@ const VideoList = () => {
 
     return (
         <>
-            <VideoForm addVideo={addVideo} />
+            <VideoForm addVideo={addVideo} getVideos={getVideos} />
             <div className="container">
                 <input type="text" placeholder="Search terms" id="search-input" value={searchTerms} onChange={(e) => (setSearchTerm(e.target.value))}></input>
                 <button type="button" onClick={getVideosBySearch}>Search Videos</button>

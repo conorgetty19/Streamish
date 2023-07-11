@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const VideoForm = ({ addVideo }) => {
+const VideoForm = ({ addVideo, getVideos }) => {
+    //variable to hold state and a setter function
+    //allows us to keep track of data and change the values of said data
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
     const [description, setDescription] = useState("");
@@ -9,19 +11,22 @@ const VideoForm = ({ addVideo }) => {
         e.preventDefault();
 
         // Create a new video object with the entered data
+        //so that we can send it to the database as part of a post fetch call
         const newVideo = {
             title: title,
             url: url,
             description: description,
         };
 
-        // Call the addVideo function passed as a prop to add the new video
-        addVideo(newVideo);
+        addVideo(newVideo).then(() => {
+            // Call getVideos function (passed as prop) to fetch the updated list
+            getVideos();
 
-        // Reset the form fields
-        setTitle("");
-        setUrl("");
-        setDescription("");
+            // Reset the form fields
+            setTitle("");
+            setUrl("");
+            setDescription("");
+        });
     };
 
     return (

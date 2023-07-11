@@ -413,10 +413,17 @@ namespace Streamish.Repositories
                         VALUES (@Title, @Description, @DateCreated, @Url, @UserProfileId)";
 
                     DbUtils.AddParameter(cmd, "@Title", video.Title);
-                    DbUtils.AddParameter(cmd, "@Description", video.Description);
                     DbUtils.AddParameter(cmd, "@DateCreated", video.DateCreated);
                     DbUtils.AddParameter(cmd, "@Url", video.Url);
                     DbUtils.AddParameter(cmd, "@UserProfileId", video.UserProfileId);
+                    if (video.Description == null)
+                    {
+                        DbUtils.AddParameter(cmd, "@Description", DBNull.Value);
+                    }
+                    else
+                    {
+                        DbUtils.AddParameter(cmd, "@Description", video.Description);
+                    }
 
                     video.Id = (int)cmd.ExecuteScalar();
                 }

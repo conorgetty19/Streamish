@@ -17,5 +17,6 @@ export const addVideo = (video) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(video),
-    });
+    })
+        .then((res) => res.json());
 };
